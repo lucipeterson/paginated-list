@@ -16,11 +16,13 @@ FSJS project 2 - List Filter and Pagination
    will only be used inside of a function, then it can be locally 
    scoped to that function.
 ***/
+const bodyElem = document.body;
+const container = bodyElem.firstElementChild;
+const listTitle = document.querySelector('h2');
+// const studentList = document.querySelectorAll('ul');             
+const students = document.querySelectorAll('li');  
 
-
-
-
-/*** 
+/***
    Create the `showPage` function to hide all of the items in the 
    list except for the ten you want to show.
 
@@ -35,14 +37,27 @@ FSJS project 2 - List Filter and Pagination
        "invoke" the function 
 ***/
 
-
-
+function showPage(min, max) {
+   for (let i = 0; i < students.length; i += 1){
+      if (i < min || i > max) {students[i].style.display = 'none';}
+   };
+};
 
 /*** 
    Create the `appendPageLinks function` to generate, append, and add 
    functionality to the pagination buttons.
-***/
+***/ 
 
+function appendPageLinks() {
+   for (let i=0;i<students.length;i+=10) {
+      let button = document.createElement('button');
+      button.innerHTML = "Page " + (i/10 + 1);
+      container.appendChild(button);
+      button.addEventListener('click',function(){showPage(i,(i+10));}, false)
+   };
+};
+
+appendPageLinks();
 
 
 
