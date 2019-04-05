@@ -37,23 +37,28 @@ const students = document.querySelectorAll('li');
        "invoke" the function 
 ***/
 
+
+
 function showPage(min, max) {
+   for (let i = 0; i < students.length; i += 1){students[i].style.display = 'none';}
    for (let i = 0; i < students.length; i += 1){
-      if (i < min || i > max) {students[i].style.display = 'none';}
+      if (i >= min && i <= max) {students[i].style.display = 'block';}
    };
 };
 
-/*** 
+showPage(0,9);
+
+/***
    Create the `appendPageLinks function` to generate, append, and add 
    functionality to the pagination buttons.
-***/ 
+***/
 
 function appendPageLinks() {
    for (let i=0;i<students.length;i+=10) {
       let button = document.createElement('button');
-      button.innerHTML = "Page " + (i/10 + 1);
+      button.textContent = "Page " + (i/10 + 1);
       container.appendChild(button);
-      button.addEventListener('click',function(){showPage(i,(i+10));}, false)
+      button.addEventListener('click',function(){showPage(i,(i+9));}, false)
    };
 };
 
