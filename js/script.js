@@ -58,7 +58,8 @@ function appendPageLinks() {
       let button = document.createElement('button');
       button.textContent = "Page " + (i/10 + 1);
       container.appendChild(button);
-      button.addEventListener('click',function(){showPage(i,(i+9));}, false)
+      button.addEventListener('click',function(){showPage(i,(i+9));}, false);
+      button.setAttribute('class','.pagination');
    };
 };
 
