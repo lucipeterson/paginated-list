@@ -16,11 +16,13 @@ FSJS project 2 - List Filter and Pagination
    will only be used inside of a function, then it can be locally 
    scoped to that function.
 ***/
+
+//DOM ELEMENTS
 const bodyElem = document.body;
 const container = bodyElem.firstElementChild;
 const listTitle = document.querySelector('h2');
 // const studentList = document.querySelectorAll('ul');             
-const students = document.querySelectorAll('li');  
+const students = document.querySelectorAll('.student-list li');  
 
 /***
    Create the `showPage` function to hide all of the items in the 
@@ -38,7 +40,9 @@ const students = document.querySelectorAll('li');
 ***/
 
 
+//FUNCTIONS
 
+//Filters list to show only a specified range:
 function showPage(min, max) {
    for (let i = 0; i < students.length; i += 1){students[i].style.display = 'none';}
    for (let i = 0; i < students.length; i += 1){
@@ -53,13 +57,25 @@ showPage(0,9);
    functionality to the pagination buttons.
 ***/
 
+//Creates a link for every ten items in the list:
 function appendPageLinks() {
+   let paginationDiv = document.createElement('div');
+   let pageList = document.createElement('ul');
+   paginationDiv.setAttribute('class','pagination');
+   container.appendChild(paginationDiv);
+   paginationDiv.appendChild(pageList);
    for (let i=0;i<students.length;i+=10) {
-      let button = document.createElement('button');
-      button.textContent = "Page " + (i/10 + 1);
-      container.appendChild(button);
-      button.addEventListener('click',function(){showPage(i,(i+9));}, false);
-      button.setAttribute('class','.pagination');
+      let pageLink = document.createElement('li');
+      pageList.appendChild(pageLink);
+      pageLink.innerHTML = '<a href = #>Page ' + (i/10 + 1) + '</a>';
+      pageLink.addEventListener('click',function(){showPage(i,(i+9));}, false);
+      
+      //FUNCTIONALITY FOR USING BUTTONS INSTEAD OF DIVS
+      // let button = document.createElement('button');
+      // button.textContent = "Page " + (i/10 + 1);
+      // container.appendChild(button);
+      // button.addEventListener('click',function(){showPage(i,(i+9));}, false);
+      // button.setAttribute('class','.pagination');
    };
 };
 
